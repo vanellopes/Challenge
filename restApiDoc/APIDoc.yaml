@@ -1,0 +1,125 @@
+swagger: "2.0"
+info:
+  description: "This is a challenge related to Backend developer."
+  version: "1.0.0"
+  title: "Swagger Clientes"
+  contact:
+    email: "gudino.vanesa@gmail.com"
+
+host: "localhost:8080"
+basePath: "/v1"
+tags:
+  - name: "clientes"
+    description: "BackEnd microservices challenge"
+schemes:
+  - "https"
+  - "http"
+paths:
+  /clientes/creacliente:
+    post:
+      tags:
+        - "clientes"
+      summary: "Agregar nuevo cliente"
+      description: "Create a new clientes"
+      operationId: "addClient"
+      consumes:
+        - "application/json"
+        - "application/xml"
+      produces:
+        - "application/json"
+        - "application/xml"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Client object that needs to be added"
+          required: true
+          schema:
+            $ref: "#/definitions/Cliente"
+      responses:
+        "405":
+          description: "Invalid input"
+  /clientes/kpideclientes:
+    get:
+      tags:
+        - "clientes"
+      summary: "Promedio y desviacion estandar"
+      description: "Calculo del promedio de edades y su desviacion estandar"
+      operationId: "kpideclientes"
+      produces:
+        - "application/json"
+        - "application/xml"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "400":
+          description: "Invalid status value"
+  /clientes/listclientes:
+    get:
+      tags:
+        - "clientes"
+      summary: "Listado de clientes"
+      description: "Muestra todos los datos del cliente y la fecha estimaa de muerte"
+      operationId: "Listado de clientes"
+      produces:
+        - "application/json"
+        - "application/xml"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponseList"
+        "400":
+          description: "Invalid status value"
+definitions:
+  Cliente:
+    type: "object"
+    required:
+      - "name"
+      - "apellido"
+      - "fechaNacimiento"
+    properties:
+      name:
+        type: "string"
+        example: "Pablo"
+      apellido:
+        type: "string"
+        example: "Campos"
+      fechaNacimiento:
+        type: "string"
+        example: "1965-08-15"
+  ApiResponse:
+    type: "object"
+    properties:
+      Desviacion estandar:
+        type: "number"
+        example: "11.18"
+      Promedio de edades:
+        type: "number"
+        example: "36.2"
+  ApiResponseList:
+    type: "object"
+    properties:
+      cliente_id:
+        type: "number"
+        format: "int32"
+        example: "2"
+      nombre:
+        type: "string"
+        example: "Marta"
+      apellido:
+        type: "string"
+        example: "Sanchez"
+      fechaNacimiento:
+        type: "string"
+        example: "1977-01-12"
+      edad:
+        type: "number"
+        example: "44"
+      fechaEstMuerte:
+        type: "string"
+        example: "2057-01-12"
+externalDocs:
+  description: "Find out more about my proyects"
+  url: "https://github.com/vanellopes"
